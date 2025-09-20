@@ -15,6 +15,11 @@ The directory layout should be
 ├── foo3
 └── grade.py
 ```
+The provided Makefile:
+  - build `server/udp_server` and `client/udp_client`
+  - create `server/` and `client/` if needed
+  - copy `foo1, foo2, foo3` into `server/`
+Tip: the script calls make clean && make automatically.
 
 ## What the grader expects your program to support
 From the client’s prompt, these commands should be understood by your server:  
@@ -66,3 +71,17 @@ Argument reference
   - `--foo2-size-mb` — size of server/foo2 for the reliability test (MB). Script builds it by concatenating server/foo1 until ~size.
   - `--loss` — packet loss percentage (e.g., 5%, 10%)
   - `--delay` — latency string for netem (e.g., 1ms, 5ms, 0ms)
+
+## Safety notes for netem
+The grader applies:
+```
+sudo tc qdisc add dev lo root netem delay <DELAY> loss <LOSS>%
+```
+and removes it with:
+```
+sudo tc qdisc del dev lo root
+```
+This affects only the loopback interface `lo`. Still, don’t interrupt the script to avoid leaving qdisc configured. If you do, you can manually clear it:
+```
+sudo tc qdisc del dev lo root
+```
