@@ -12,7 +12,7 @@ Prereqs
 ```
 Linux with iptables (root required)
 make, a working ./proxy target (built by make)
-Python 3.8+ with psutil (sudo apt install install python3-psutil)
+Python 3.8+ with psutil (sudo apt install python3-psutil)
 Internet access to http://netsys.cs.colorado.edu/
 ```
 ## How to run
