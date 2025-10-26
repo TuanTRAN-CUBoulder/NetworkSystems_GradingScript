@@ -54,6 +54,10 @@ Depending on your implementation (go-back-N or stop-n-wait) and file size, the w
 
 You have to experiment with those arguments. 
 
+Also, `netem` is a commandline tool on `Ubuntu`, thus you have to run the script on the course VM or your own Ubuntu machine.
+
+Running the script on other OS won't be able to apply packet loss and latency.
+
 Basic run (defaults shown):
 ```
 python3 grade.py \
