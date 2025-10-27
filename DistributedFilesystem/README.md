@@ -11,15 +11,13 @@ The grading script (`grade_pa4.py`) automatically:
 
 1. Builds your code (`make clean && make`)
 2. Starts up to **4 DFS servers**
-3. Uploads (`PUT`) and downloads (`GET`) test files using your `dfc` client
+3. Uploads (`put`) and downloads (`get`) test files using your `dfc` client
 4. Checks for:
    - File integrity (hash match)
    - Correct distribution of file pieces
    - Redundancy and fault tolerance
    - Proper handling of incomplete file reconstruction
    - Concurrent client support
-
-Each phase corresponds to one **test case** with assigned points.
 
 ---
 
@@ -53,7 +51,7 @@ During grading, the following directories will be created:
 ├── dfc2/
 ├── dfc3/
 ├── dfc4/
-└── grade_pa4.py
+└── grade.py
 ```
 
 The `sample_file/` directory holds reference files downloaded from the course test server.
@@ -65,10 +63,10 @@ The `sample_file/` directory holds reference files downloaded from the course te
 Run the grader with **4 port numbers** for your DFS servers:
 
 ```bash
-python3 grade_pa4.py <port_1> <port_2> <port_3> <port_4>
+python3 grade.py <port_1> <port_2> <port_3> <port_4>
 
 # Example
-python3 grade_pa4.py 10001 10002 10003 10004
+python3 grade.py 10001 10002 10003 10004
 ```
 
 The script:
