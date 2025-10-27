@@ -85,42 +85,21 @@ The script:
 
 ## 🧪 Tests and Scoring
 
-| Test | Description | Points |
-|------|--------------|--------|
-| **Test 1: 4 Servers** | Uploads both sample files, verifies full reconstruction, correct piece distribution (4 pieces/server = 16 total), and `dfc list` output. | **50 pts** |
-| **Test 2: 3 Servers** | Terminates **server 4**, ensures redundancy allows full `list` + `get` success and hash match. | **20 pts** |
-| **Test 3: 2 Servers** | Terminates **server 2**, again verifies redundancy and hash correctness. | **20 pts** |
-| **Test 4: 1 Server** | Terminates **server 3**, leaving one active server. `list` output should show `(incomplete)` entries and `get` should print “<filename> is incomplete”. | **10 pts** |
-| **Test 5: Multiple DFCs** | Restarts all 4 servers, spawns **4 concurrent clients** (`dfc1–dfc4`), each fetching `wine3.jpg`. All 4 hashes must match the sample for credit. | **10 pts** |
+| Test                     | Description                                                                                                        | Points |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------|:------:|
+| **Test 1: 4 Servers**   | Upload sample files, verify full reconstruction; check piece distribution (4/server = 16 total); run `dfc list`. | **50** |
+| **Test 2: 3 Servers**   | Kill server 4; redundancy allows `list` + `get` to succeed; hashes match.                                          | **20** |
+| **Test 3: 2 Servers**   | Kill server 2; redundancy still holds; hashes match after fresh `get`.                                             | **20** |
+| **Test 4: 1 Server**    | Kill server 3; with one server left, `list` shows "\<filename> [incomplete]" and `get` prints “\<filename> is incomplete”.     | **10** |
+| **Test 5: Multiple DFCs** | Restart all 4 servers; run 4 concurrent clients (`dfc1`–`dfc4`) to `get` `wine3.jpg`; all 4 hashes match sample.  | **10** |
 
-**Total:**  110 points
+**Total:** 110 points
 
 ---
 
 ## 🧾 Output Example
 
-```
-=== Test 1: 4 servers ===
-[*] Uploading (PUT) ...
-[*] Downloading (GET) ...
-[*] Checking hashes (Test 1)...
-    - wine3.jpg: <md5> vs <md5>
-    - apple_ex.png: <md5> vs <md5>
-[*] Checking server piece counts ...
-    - dfs1: 4 files
-    - dfs2: 4 files
-    - dfs3: 4 files
-    - dfs4: 4 files
----- ./dfc list output (Test 1) ----
-apple_ex.png
-wine3.jpg
----------------------------------
-==== RESULT (Test 1) ====
-Score: 50 / 50
-...
-==== TOTAL ====
-Total Score: 110 / 110
-```
+Refer to `expected_output.txt` file in this repo. 
 
 ---
 
@@ -149,6 +128,8 @@ pkill -f dfs
   ./dfc put sample_file/wine3.jpg
   ./dfc get wine3.jpg
   ./dfc list
+  md5sum wine3.jpg
+  md5sum sample_file/wine3.jpg
   ```
 - Avoid hardcoding absolute paths—`getcwd()` is used dynamically.
 
